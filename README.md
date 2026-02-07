@@ -1,38 +1,37 @@
-# AI Resume Q&A Bot using LangChain (RAG, Free Local LLM)
+# AI Resume Q&A Bot using LangChain (RAG)
 
 ## 📌 Overview
-The AI Resume Q&A Bot is a command-line based application that allows users to ask natural language questions about a **PDF resume** and receive **accurate, context-aware answers**.
+The **AI Resume Q&A Bot** is a command-line application that allows users to ask natural language questions about a **PDF resume** and receive **accurate, context-aware answers**.
 
-The project is built using **LangChain** and follows the **Retrieval Augmented Generation (RAG)** approach.  
-To keep the project completely free and accessible, it uses a **locally hosted Large Language Model (LLM) via Ollama**, eliminating the need for paid APIs such as OpenAI.
+The project is built using **LangChain** and follows the **Retrieval Augmented Generation (RAG)** pattern to ensure responses are generated **strictly from resume content**.
 
 ---
 
 ## 🎯 Problem Statement
-Large Language Models (LLMs) cannot directly read PDF files and often hallucinate answers when asked questions without proper context.
+Traditional LLM-based systems cannot directly process PDF documents and often produce unreliable or hallucinated answers when queried without proper grounding.
 
 This project addresses these challenges by:
-- Extracting text from a resume PDF
-- Storing the content as semantic vector embeddings
-- Retrieving only the most relevant resume sections
-- Injecting retrieved context into the LLM using structured prompt engineering
+- Extracting structured text from a resume PDF
+- Converting the content into semantic vector embeddings
+- Retrieving only the most relevant sections of the resume
+- Injecting retrieved context into a controlled prompt
 
-This ensures **high accuracy, relevance, and reliability**.
+This approach improves **accuracy, relevance, and consistency**.
 
 ---
 
 ## 🧠 Solution Approach (RAG Pipeline)
-The system uses **Retrieval Augmented Generation (RAG)** to generate answers strictly from the resume content.
+The system implements **Retrieval Augmented Generation (RAG)** to ensure all answers are grounded in the resume.
 
-### Flow:
-1. Resume PDF is loaded and converted to text
-2. Text is split into smaller semantic chunks
-3. Chunks are converted into vector embeddings
-4. Embeddings are stored in a FAISS vector database
-5. User queries are embedded and matched semantically
-6. Relevant resume chunks are retrieved
-7. Retrieved context is injected into a prompt template
-8. Local LLM generates the final answer
+### Processing Flow
+1. Resume PDF is loaded and converted into text  
+2. Text is split into semantically meaningful chunks  
+3. Chunks are transformed into vector embeddings  
+4. Embeddings are stored in a FAISS vector store  
+5. User queries are embedded and matched against stored vectors  
+6. Relevant resume chunks are retrieved  
+7. Retrieved context is injected into a prompt template  
+8. The LLM generates a response based only on this context  
 
 ---
 
@@ -52,37 +51,24 @@ Retriever
 ↓
 Prompt Template
 ↓
-Local LLM (Ollama)
+LLM (via Ollama)
 ↓
 Answer
-
 
 ---
 
 ## 🛠️ Tech Stack
-- Python
-- LangChain
-- Ollama (Local LLM)
-- FAISS (Vector Database)
-- PyPDF
+- **Python**
+- **LangChain**
+- **Ollama**
+- **FAISS**
+- **PyPDF**
 
 ---
 
 ## ✨ Key Features
-- Ask questions about a resume using natural language
-- Accurate answers using RAG
-- Reduced hallucination by restricting LLM context
-- Fully free (no paid APIs)
-- Clean CLI-based interface
-- Resume and interview ready project
-
----
-
-## ⚙️ Setup & Installation
-
-### 1. Install Ollama
-Download from https://ollama.com and install.
-
-Pull a free model:
-```bash
-ollama pull mistral
+- Natural language question answering over resume content
+- Context-grounded responses using RAG
+- Deterministic extraction for basic information (name, email, phone)
+- Reduced hallucination through strict prompt constraints
+- Command-line interface for simplicity and clarity
